@@ -1,1 +1,1 @@
-PHP sTUDY
+PHP STUDY

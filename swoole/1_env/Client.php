@@ -15,6 +15,11 @@ class Client{
 		if(!$this->client->connect("127.0.0.1",9501,1)){
 			echo "Error :{$this->client->errMsg}[{$this->client->errCode}]\n";
 		}
+		echo "连接成功\n";
+		swoole_timer_tick(1000,function(){
+			$this->client->send('heart');	
+		});
+		//$this->heart();//心跳
 	//客户端异步之后就不能再同步发消息
 	//	fwrite(STDOUT,"请输入消息(please input msg):");
 	//	$msg = trim(fgets(STDIN));
@@ -42,6 +47,13 @@ class Client{
 
 	public function onClose($cli){
 		echo "client connect close".PHP_EOL;
+	}
+
+	public function heart(){
+		swoole_timer_tick(1000,function(){
+			var_dump(1);
+			$this->client->send('heart');
+		});
 	}
 
 }

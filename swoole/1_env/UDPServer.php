@@ -12,6 +12,7 @@ class Server{
 	}
 
 	public function onPacket($serv,$data,$client_info){
+		var_dump($data);
 		$serv->sendTo($client_info['address'],$client_info['port'],"SERVER RETURN :".$data);
 		var_dump($client_info);
 	}

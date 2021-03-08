@@ -6,14 +6,9 @@
 		return ((float)$usec + (float)$sec);
 	}
 
-	$data = http_build_query([
-		'lng' => '',
-		'lat' => '',
-		'order' => 1,
-	]);
-
+	$data = [];
 	$opts = [
-		'http' => [
+		'https' => [
 			'method' => 'post',
 			'header'  => 'Content-type: application/x-www-form-urlencoded',
 			'data' => $data,
@@ -25,12 +20,13 @@
 
 	$time_start = microtime_float();
 	
-//$result = file_get_contents('https://vvv.trc-demo.com/api/room/index',false,$context);
-	$result = file_get_contents('http://php_study.ljstu.top/base/php_context/server.php',false,$context);
+	$result = file_get_contents('http://php_study.ljstu.top/base/php_context/server.php',true,$context);
+	$header = get_headers('http://php_study.ljstu.top/base/php_context/server.php');
 
 	$end_time = microtime_float();
 
 	$time = $end_time - $time_start;
+	var_dump($header);
 	echo $result,"\n";
 
 	echo "请求所耗时间{$time}";
